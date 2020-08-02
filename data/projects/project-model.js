@@ -4,9 +4,8 @@ function find() {
   return db("project");
 }
 
-async function findById(id) {
-  const project = db("project").where({ id }).first();
-  return project;
+function findById(id) {
+  return db("project").where({ id }).first();
 }
 
 function add(project) {
