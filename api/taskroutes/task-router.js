@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Task = require("../../data/models/task-model");
+const { completionCheck } = require("../completion-check");
 
 // GET ALL PROJECTS
 
@@ -30,7 +31,7 @@ router.get("/:id", (req, res) => {
 
 // ADD ONE PROJECT
 
-router.post("/", (req, res) => {
+router.post("/", completionCheck, (req, res) => {
   Task.add(req.body)
     .then((task) => {
       res.status(201).json(task);
