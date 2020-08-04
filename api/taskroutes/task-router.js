@@ -1,39 +1,39 @@
 const express = require("express");
 const router = express.Router();
-const Project = require("../../data/models/project-model");
+const Task = require("../../data/models/task-model");
 
 // GET ALL PROJECTS
 
 router.get("/", (req, res) => {
-  Project.find()
-    .then((projects) => {
-      res.status(200).json(projects);
+  Task.find()
+    .then((tasks) => {
+      res.status(200).json(tasks);
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).json({ err: "Couldn't find the projects" });
+      res.status(500).json({ err: "Couldn't find the tasks" });
     });
 });
 
 // GET ONE PROJECT
 
 router.get("/:id", (req, res) => {
-  Project.findById(req.params.id)
-    .then((project) => {
-      res.status(200).json(project);
+  Task.findById(req.params.id)
+    .then((task) => {
+      res.status(200).json(task);
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).json({ err: "Could not find project with that ID" });
+      res.status(500).json({ err: "Could not find task with that ID" });
     });
 });
 
 // ADD ONE PROJECT
 
 router.post("/", (req, res) => {
-  Project.add(req.body)
-    .then((project) => {
-      res.status(201).json(project);
+  Task.add(req.body)
+    .then((task) => {
+      res.status(201).json(task);
     })
     .catch((err) => {
       console.error(err);
@@ -44,12 +44,12 @@ router.post("/", (req, res) => {
 // UPDATE ONE PROJECT
 
 router.put("/:id", (req, res) => {
-  Project.update(req.params.id)
-    .then((project) => {
-      if (!project) {
-        res.status(404).json({ err: "That project does not exist" });
+  Task.update(req.params.id)
+    .then((task) => {
+      if (!task) {
+        res.status(404).json({ err: "That task does not exist" });
       } else {
-        res.status(204).json(project);
+        res.status(204).json(task);
       }
     })
     .catch((err) => {
@@ -61,7 +61,7 @@ router.put("/:id", (req, res) => {
 // DELETE ONE PROJECT
 
 router.delete("/:id", (req, res) => {
-  const deleted = Project.remove(req.params.id);
+  const deleted = Task.remove(req.params.id);
   res.status(200).json(deleted);
 });
 
